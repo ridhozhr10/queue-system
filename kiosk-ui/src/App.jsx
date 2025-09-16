@@ -40,7 +40,7 @@ function App() {
           setFormData={setFormData}
         />
       ) : (
-        <div className="w-10/12 flex-wrap p-6 text-center">></div>
+        <div className="w-10/12 flex-wrap p-6 text-center"></div>
       )}
     </Layout>
   );
