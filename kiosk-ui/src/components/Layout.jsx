@@ -12,9 +12,7 @@ const langDropdown = [
   { name: "English", href: "#" },
 ];
 
-const serviceItems = ["Service1", "Service2", "Service3"];
-
-export default function Layout() {
+export default function Layout({ children }) {
   return (
     <>
       <div className="min-h-full">
@@ -23,11 +21,7 @@ export default function Layout() {
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="shrink-0">
-                  <img
-                    alt="Your Company"
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                    className="size-8"
-                  />
+                  <span className="text-xl text-white">SISTEM ANTRIAN</span>
                 </div>
               </div>
               <div className="block">
@@ -66,21 +60,7 @@ export default function Layout() {
         </nav>
 
         <main className="h-screen flex items-center justify-center bg-gray-100">
-          <div className="w-full flex-wrap p-6 text-center">
-            <div>
-              <h1 className="text-6xl font-bold mb-4">Selamat Datang</h1>
-              <h1 className="text-2xl font-bold mb-4">
-                Silahkan Pilih Layanan
-              </h1>
-            </div>
-            <div className="grid grid-cols-3 gap-4 mt-6">
-              {serviceItems.map((item, i) => (
-                <div key={i + "item"} className="text-4xl">
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
+          {children}
         </main>
       </div>
     </>
