@@ -1,3 +1,5 @@
+import CardSelect from "./input/CardSelect";
+
 const serviceItems = [
   { label: "Pembaruan passport", value: "renewal-passport" },
   { label: "Ekstensi Visa", value: "visa-extension" },
@@ -17,20 +19,16 @@ export default function FormIntroduction({
         <h1 className="text-2xl font-bold mb-4">Silahkan Pilih Layanan</h1>
       </div>
       <form onSubmit={handleSubmit}>
-        <pre>{JSON.stringify(formData)}</pre>
         <div className="grid grid-cols-3 gap-6 mt-20">
           {serviceItems.map((item, i) => (
-            <div
-              key={i + "item"}
-              className={`w-full ${
-                item.value === formData.serviceType ? "shadow-sm" : "shadow-lg"
-              }  hover:shadow-sm p-4 shadow-gray-500`}
+            <CardSelect
               onClick={() => {
                 setFormData({ ...formData, serviceType: item.value });
               }}
-            >
-              <span className="text-2xl">{item.label}</span>
-            </div>
+              isActive={item.value === formData.serviceType}
+              label={item.label}
+              key={i + "card"}
+            />
           ))}
           <div className="col-span-3">
             <div class="mt-2">

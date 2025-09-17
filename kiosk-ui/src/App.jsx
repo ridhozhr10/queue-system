@@ -30,6 +30,15 @@ function App() {
     setLoading(false);
   }
 
+  function resetPage() {
+    setResponse(null);
+    setFormData({
+      serviceType: "",
+      phone: "",
+    });
+    setLoading(false);
+  }
+
   return (
     <Layout>
       {response === null ? (
@@ -40,7 +49,20 @@ function App() {
           setFormData={setFormData}
         />
       ) : (
-        <div className="w-10/12 flex-wrap p-6 text-center"></div>
+        <div className="grid gap-6 shadow-2xl p-6 text-center">
+          <span className="text-2xl">Nomor antrian anda:</span>
+          <h1 className="text-4xl text-bold">{response.queueNumber}</h1>
+          <div className="flex flex-col gap-2">
+            <span className="text-lg">Layanan: {response.serviceType}</span>
+            <span className="text-lg">Whatsapp: {response.phone}</span>
+          </div>
+          <button
+            className="border-1 p-4 text-xl text-bold rounded-lg disabled:cursor-not-allowed"
+            onClick={resetPage}
+          >
+            Kembali
+          </button>
+        </div>
       )}
     </Layout>
   );
