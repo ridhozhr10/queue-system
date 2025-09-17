@@ -2,12 +2,14 @@ const express = require("express");
 const app = express();
 const sequelize = require("./utils/db");
 const ticketsRouter = require("./api/tickets");
+const counterRouter = require("./api/counter");
 const cors = require("cors");
 
 require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 app.use("/tickets", ticketsRouter);
+app.use("/counter", counterRouter);
 
 const PORT = process.env.PORT || 3000;
 

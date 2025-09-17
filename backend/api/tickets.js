@@ -30,10 +30,14 @@ router.patch("/status/:id", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/waiting", async (req, res) => {
   try {
-    const ticket = await Ticket.findByPk(req.params.id);
-    if (!ticket) return res.json({ message: "No tickets available" });
+    const ticket = await Ticket.findAll({
+      where: { status: "waiting" },
+      order: [["createdAt", "ASC"]],
+    });
+    if (!ticket || ticket.length === 0)
+      return res.json({ message: "No tickets available" });
     res.json(ticket);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -47,6 +51,16 @@ router.get("/next", async (req, res) => {
       where: { status: "waiting" },
       order: [["createdAt", "ASC"]],
     });
+    if (!ticket) return res.json({ message: "No tickets available" });
+    res.json(ticket);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const ticket = await Ticket.findByPk(req.params.id);
     if (!ticket) return res.json({ message: "No tickets available" });
     res.json(ticket);
   } catch (err) {
