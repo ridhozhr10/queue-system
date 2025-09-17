@@ -30,13 +30,9 @@ router.patch("/status/:id", async (req, res) => {
   }
 });
 
-// Get next ticket (FIFO for now)
-router.get("/next", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const ticket = await Ticket.findOne({
-      where: { status: "waiting" },
-      order: [["createdAt", "ASC"]],
-    });
+    const ticket = await Ticket.findByPk(req.params.id);
     if (!ticket) return res.json({ message: "No tickets available" });
     res.json(ticket);
   } catch (err) {
@@ -44,9 +40,13 @@ router.get("/next", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+// Get next ticket (FIFO for now)
+router.get("/next", async (req, res) => {
   try {
-    const ticket = await Ticket.findByPk(req.params.id);
+    const ticket = await Ticket.findOne({
+      where: { status: "waiting" },
+      order: [["createdAt", "ASC"]],
+    });
     if (!ticket) return res.json({ message: "No tickets available" });
     res.json(ticket);
   } catch (err) {
