@@ -12,9 +12,42 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.patch("/:id/active", async (req, res) => {
+  try {
+    await Counter.update({ isReady: false }, { where: { isReady: true } });
+
+    const counter = await Counter.findByPk(req.params.id);
+    if (!counter)
+      return res
+        .status(201)
+        .json({ message: "Counter not found, deactivating all counter" });
+    counter.isReady = true;
+    await counter.save();
+    res.json(counter);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.get("/", async (req, res) => {
+  const withStatus = req.query.withStatus === "true";
   try {
     const counters = await Counter.findAll();
+    if (withStatus) {
+      for (const [i, counter] of counters.entries()) {
+        const activeTickets = await counter.getTickets({
+          where: { status: "called" },
+        });
+        if (activeTickets.length > 0) {
+          counters[i] = {
+            ...counters[i].toJSON(),
+            status: "busy",
+            currentTicket: activeTickets[0],
+          };
+        }
+      }
+    }
+
     res.json(counters);
   } catch (err) {
     res.status(500).json({ error: err.message });

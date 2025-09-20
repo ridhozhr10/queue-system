@@ -6,12 +6,16 @@
   "scripts": {
     "dev:kiosk": "vite --config vite.kiosk.config.js",
     "dev:counter": "vite --config vite.counter.config.js",
+    "dev:screen": "vite --config vite.screen.config.js",
     "build:kiosk": "vite build --config vite.kiosk.config.js",
     "build:counter": "vite build --config vite.counter.config.js",
-    "dev": "concurrently -n kiosk,counter -c cyan,magenta \"npm run dev:kiosk\" \"npm run dev:counter\"",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build:screen": "vite build --config vite.screen.config.js",
+    "dev": "concurrently -n kiosk,counter,screen -c cyan,magenta,yellow \"npm run dev:kiosk\" \"npm run dev:counter\" \"npm run dev:screen\"",
+    "build": "npm run build:kiosk && npm run build:admin",
+    "preview:kiosk": "vite preview --config vite.kiosk.config.js --port 4174",
+    "preview:counter": "vite preview --config vite.counter.config.js --port 4175",
+    "preview:screen": "vite preview --config vite.screen.config.js --port 4176",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@headlessui/react": "^2.2.8",

@@ -24,6 +24,7 @@ app.get("/testwa", async (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 sequelize.sync().then(() => {
+  require("./models/associations");
   whatsappClient.initialize();
   app.listen(PORT, () => console.log(`Queue system running on port ${PORT}`));
 });

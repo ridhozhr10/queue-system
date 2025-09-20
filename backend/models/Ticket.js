@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../utils/db");
+const Counter = require("./Counter");
 
 const Ticket = sequelize.define(
   "Ticket",

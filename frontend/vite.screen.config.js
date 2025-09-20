@@ -5,14 +5,14 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  root: "src/counter-ui", // root folder
+  root: "src/screen-ui", // root folder
   publicDir: "../../public",
-  cacheDir: "node_modules/.vite-counter",
+  cacheDir: "node_modules/.screen-kiosk",
   server: {
-    port: 5172, // unique port for kiosk
+    port: 5173, // unique port for kiosk
   },
   build: {
-    outDir: resolve("dist/counter"),
+    outDir: resolve("dist/screen"),
     emptyOutDir: true,
   },
 });

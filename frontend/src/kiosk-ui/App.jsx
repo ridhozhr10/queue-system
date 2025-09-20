@@ -18,7 +18,10 @@ function App() {
     const response = await fetch("http://localhost:3000/tickets", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+        ...formData,
+        phone: formData.phone ? `62${formData.phone}` : "",
+      }),
     });
 
     const data = await response.json();

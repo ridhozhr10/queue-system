@@ -12,6 +12,10 @@ const Counter = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    isReady: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   { timestamps: true }
 );
