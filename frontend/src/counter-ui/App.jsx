@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState } from "react";
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
 const counterId = 1;
 

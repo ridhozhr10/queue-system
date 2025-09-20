@@ -8,7 +8,7 @@
     "dev:counter": "vite --config vite.counter.config.js",
     "build:kiosk": "vite build --config vite.kiosk.config.js",
     "build:counter": "vite build --config vite.counter.config.js",
-    "dev": "concurrently \"npm run dev:kiosk\" \"npm run dev:counter\"",
+    "dev": "concurrently -n kiosk,counter -c cyan,magenta \"npm run dev:kiosk\" \"npm run dev:counter\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
