@@ -1,10 +1,14 @@
 {
-  "name": "kiosk-ui",
+  "name": "counter-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev:kiosk": "vite --config vite.kiosk.config.js",
+    "dev:counter": "vite --config vite.counter.config.js",
+    "build:kiosk": "vite build --config vite.kiosk.config.js",
+    "build:counter": "vite build --config vite.counter.config.js",
+    "dev": "concurrently \"npm run dev:kiosk\" \"npm run dev:counter\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -22,6 +26,7 @@
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.2.1",
     "eslint": "^9.33.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
